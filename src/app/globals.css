@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* light: blue & white porcelain */
+:root {
+  --bg: #f4f6fa;
+  --ink: #142347;
+  --muted: #6b7a99;
+  --faint: #e1e7f1;
+  --wash: #3a5a9e;
+  --t0: #142f7a;
+  --t1: #2449a8;
+  --t2: #4a72cc;
+  --t3: #93acdf;
+  --t4: #c6d3ee;
+  --hl: rgb(244 246 250 / 0.86);
+  --mtn: #2a4c86;
+  --sun: #8fa8dc;
+  --hint: visible;
+  color-scheme: light;
+}
+
+/* dark: ink gray & moonlit blue */
+:root[data-theme="dark"] {
+  --bg: #1a1b1e;
+  --ink: #e4e7ed;
+  --muted: #8a909c;
+  --faint: #27292e;
+  --wash: #7393cc;
+  --t0: #c3d8ff;
+  --t1: #93b5f7;
+  --t2: #6189d6;
+  --t3: #42609a;
+  --t4: #2e3b58;
+  --hl: rgb(26 27 30 / 0.86);
+  --mtn: #8ea6cc;
+  --sun: #e4eaf5;
+  --hint: hidden;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1b1e;
+    --ink: #e4e7ed;
+    --muted: #8a909c;
+    --faint: #27292e;
+    --wash: #7393cc;
+    --t0: #c3d8ff;
+    --t1: #93b5f7;
+    --t2: #6189d6;
+    --t3: #42609a;
+    --t4: #2e3b58;
+    --hl: rgb(26 27 30 / 0.86);
+    --mtn: #8ea6cc;
+  --sun: #e4eaf5;
+  --hint: hidden;
+    color-scheme: dark;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+::selection {
+  background: var(--t1);
+  color: var(--bg);
+}
+
+/* text sits on a soft plate so it stays readable as birds pass beneath */
+.hl {
+  background: var(--hl);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.1em 0.3em;
+  margin: 0 -0.3em;
+}
+
+.hero {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 16px 20vh;
+  font-size: 13px;
+  line-height: 2.1;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 0 0 26vh 9vw;
+    font-size: 15px;
+  }
+}
+
+.hero a,
+.theme-toggle {
+  pointer-events: auto;
+}
+
+.hero > * {
+  width: fit-content;
+}
+
+.intro p {
+  margin: 0.15em 0;
+}
+
+.hero a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--muted);
+  transition: color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.hero a:hover {
+  color: var(--t1);
+  border-color: var(--t1);
+}
+
+.socials {
+  margin-top: 1.8em;
+  color: var(--muted);
+}
+
+.socials .sep {
+  opacity: 0.6;
+}
+
+.hint {
+  visibility: var(--hint); /* hidden, not removed, so the layout matches by day and night */
+  margin-top: 1.2em;
+  font-size: 0.8em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+/* theme toggle on the left, site links on the right, on one line */
+.site-header {
+  position: fixed;
+  top: 20px;
+  left: 16px;
+  right: 16px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .site-header {
+    top: 28px;
+    left: 32px;
+    right: 32px;
+  }
+}
+
+.theme-toggle,
+.site-nav {
+  display: flex;
+  gap: 0.5em;
+  pointer-events: auto;
+}
+
+.site-nav a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.site-nav a:hover {
+  opacity: 0.9;
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  opacity: 1;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.theme-toggle button {
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.theme-toggle button:hover {
+  opacity: 0.9;
+}
+
+.theme-toggle button[aria-pressed="true"] {
+  color: var(--ink);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
